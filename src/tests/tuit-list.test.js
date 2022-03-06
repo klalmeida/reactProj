@@ -15,13 +15,35 @@ const MOCKED_TUITS = [
 ];
 
 test('tuit list renders static tuit array', () => {
-  // TODO: implement this
+  render(
+    <HashRouter>
+      <TuitList tuits = {MOCKED_TUITS}/>
+    </HashRouter>);
+    const linkElement = screen.getByText(/alice's tuit/i);
+    expect(linkElement). toBeInTheDocument();
 });
 
 test('tuit list renders async', async () => {
-  // TODO: implement this
+  const tuits = await findAllTuits();
+  render(
+    <HashRouter>
+      <TuitList tuits = {tuits}/>
+    </HashRouter>);
+  const linkElement = screen.getByText(/bob's tuit/i);
+  expect(linkElement).toBeInTheDocument();
 })
 
 test('tuit list renders mocked', async () => {
-  // TODO: implement this
+  axios.get.mockImplementation(() =>
+    Promise.resolve({data: {tuits: MOCKED_TUITS}}));
+  const response = await findAllTuits();
+  const tuits = response.tuits;
+
+  render(
+    <HashRouter>
+      <TuitList tuits = {tuits}/>
+    </HashRouter>);
+
+  const tuit = screen.getByText(/alice's tuit/i);
+  expect(tuit).toBeInTheDocument();
 });
