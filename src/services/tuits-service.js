@@ -3,6 +3,8 @@ import axios from "axios";
 const TUITS_API = "https://cs5500-01-sp22.herokuapp.com/api/tuits";
 const USERS_API = "https://cs5500-01-sp22.herokuapp.com/api/users";
 
+// KA URL = "https://kalmeida-cs5500.herokuapp.com/api/tuits";
+
 export const findAllTuits = () =>
     axios.get(TUITS_API)
         .then(response => response.data);
