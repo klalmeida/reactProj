@@ -15,7 +15,7 @@ describe('createUser', () => {
   // setup test before running test
   beforeAll(() => {
     // remove any/all users to make sure we create it in the test
-    return deleteUsersByUsername(ripley.username);
+    deleteUsersByUsername(ripley.username);
   })
 
   // clean up after test runs
@@ -76,7 +76,7 @@ describe('findUserById',  () => {
   // setup before running test
   beforeAll(() => {
     // clean up before the test making sure the user doesn't already exist
-    return deleteUsersByUsername(adam.username)
+    deleteUsersByUsername(adam.username)
   });
 
   // clean up after ourselves
