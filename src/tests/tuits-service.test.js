@@ -3,39 +3,37 @@ import {
   findAllTuits, updateTuit
 } from "../services/tuits-service";
 
+
 describe('createTuit', () => {
   // sample tuit to insert
   const tuit1 = {
     tid: "001",
     tuit: "this is test tuit #1",
-    postedOn: "1/1/11",
-    postedBy: "USER1"
+    uid: "USER1"
   };
 
   // test setup
   beforeAll(() => {
     // clear any identical tuits
-    return deleteTuit(tuit1.tid);
+    deleteTuit(tuit1.tid);
   })
 
   // test cleanup
   afterAll(() => {
     // remove any data we created
-    return deleteTuit(tuit1.tid);
+    deleteTuit(tuit1.tid);
   })
 
   test('can create tuit with REST API', async () => {
     // insert new tuit to database
-    const newTuit = await createTuit(tuit1);
+    const newTuit = await createTuit(tuit1.uid, tuit1);
 
     // verify inserted tuit's properties match parameter tuit
     expect(newTuit.tid).toEqual(tuit1.tid);
     expect(newTuit.tuit).toEqual(tuit1.tuit);
-    expect(newTuit.postedBy).toEqual(tuit1.postedBy);
-    expect(newTuit.postedOn).toEqual(tuit1.postedOn);
+    expect(newTuit.uid).toEqual(tuit1.uid);
   });
 });
-
 
 
 
@@ -45,14 +43,13 @@ describe('deleteTuit', () => {
   const tuit2 = {
     tid: "002",
     tuit: "this is test tuit #2",
-    postedOn: "2/2/22",
-    postedBy: "USER2"
+    uid: "USER2"
   };
 
   // test setup
   beforeAll(() => {
     // insert sample tuit
-    return createTuit(tuit2);
+    return createTuit(tuit2.uid, tuit2);
   });
 
   //test cleanup
@@ -78,14 +75,13 @@ describe('findTuitById', () => {
   const tuit3 = {
     tid: "003",
     tuit: "this is test tuit 3",
-    postedOn: "3/3/13",
-    postedBy: "USER3"
+    uid: "USER3"
   };
 
   // test setup 
   beforeAll(() => {
     // clear any identical tuits
-    return deleteTuit(tuit3.tid);
+    deleteTuit(tuit3.tid);
   });
 
   // test cleanup
@@ -96,21 +92,20 @@ describe('findTuitById', () => {
 
   test('can retrieve a tuit by their primary key with REST API', async () => {
   // insert new tuit into database
-  const newTuit = await createTuit(user3);
+  const newTuit = await createTuit(tuit3.uid, tuit3);
 
   // verify new tuit matches parameter tuit
   expect(newTuit.tid).toEqual(tuit3.tid);
   expect(newTuit.tuit).toEqual(tuit3.tuit);
-  expect(newTuit.postedBy).toEqual(tuit3.postedBy);
-  expect(newTuit.postedOn).toEqual(tuit3.postedOn);
+  expect(newTuit.uid).toEqual(tuit3.uid);
+
 
   // retrieve new tuit from the database by its PK
   const oldTuit = await findTuitById(newTuit._id);
 
   expect(oldTuit.tid).toEqual(tuit3.tid);
   expect(oldTuit.tuit).toEqual(tuit3.tuit);
-  expect(oldTuit.postedBy).toEqual(tuit3.postedBy);
-  expect(oldTuit.postedOn).toEqual(tuit3.postedOn);
+  expect(oldTuit.uid).toEqual(tuit3.uid);
   });
 });
 
@@ -119,17 +114,18 @@ describe('findTuitById', () => {
 
 describe('findAllTuits', () => {
 
-  const tuitz = [ "1", "2", "3"];
+  const tids = [
+      "001", "002", "003"
+  ];
 
   // test setup
   beforeAll(() =>
     // sample tuits to insert
-    tuitz.map(tid =>
-      createTuit({
-        tid,
+    tids.map(tid =>
+      createTuit(`USER${tid}`,{
+        tid: tid,
         tuit: `test tuit number ${tid}`,
-        postedOn: `${tid}/${tid}/22`,
-        postedBy: `USER${tid}`
+        uid: `USER${tid}`
       })
     )
   );
@@ -137,7 +133,7 @@ describe('findAllTuits', () => {
   // test cleanup
   afterAll(() => 
     // delete inserted tuits
-    tuitz.map(tid =>
+    tids.map(tid =>
       deleteTuit(tid)
     )
   );
@@ -147,20 +143,18 @@ describe('findAllTuits', () => {
     const tuits = await findAllTuits();
 
     // number of tuits should be 3
-    expect(tuits.length).toBeGreaterThanOrEqual(tuitz.length);
+    expect(tuits.length).toBeGreaterThanOrEqual(tids.length);
 
     // check each inserted tuit
     const insertedTuits = tuits.filter(
-      aTuit => tuitz.indexOf(aTuit.tid) >= 0
-    );
+      aTuit => tids.indexOf(aTuit.tid) >= 0);
 
     // compare added tuits to parameter tuits
     insertedTuits.forEach(aTuit => {
-      const aTid = tuitz.find(aTid => aTid === aTuit.tid)
+      const aTid = tids.find(aTid => aTid === aTuit.tid)
       expect(aTuit.tid).toEqual(aTid);
       expect(aTuit.tuit).toEqual(`test tuit number ${tid}`);
-      expect(aTuit.postedOn).toEqual(`${tid}/${tid}/22`);
-      expect(aTuit.postedBy).toEqual(`USER${tid}`);
+      expect(aTuit.uid).toEqual(`USER${tid}`);
     });
   });
 
@@ -171,21 +165,19 @@ describe('findAllTuits', () => {
     const tuit5 = {
       tid: "005",
       tuit: "this is test tuit #5",
-      postedOn: "5/5/15",
-      postedBy: "USER5"
+      uid: "USER5"
     };
 
     const target = {
       tid: "005",
       tuit: "this is the updated tuit",
-      postedOn: "5/5/15",
-      postedBy: "USER5"
+      uid: "USER5"
     }
   
     // test setup
     beforeAll(() => {
       // clear any identical tuits
-      return deleteTuit(tuit5.tid);
+      deleteTuit(tuit5.tid);
     })
   
     // test cleanup
@@ -196,13 +188,12 @@ describe('findAllTuits', () => {
   
     test('can update tuit with REST API', async () => {
       // insert new tuit to database
-      const newTuit = await createTuit(tuit5);
+      const newTuit = await createTuit(tuit5.uid, tuit5);
   
       // verify inserted tuit matches parameter tuit
       expect(newTuit.tid).toEqual(tuit5.tid);
       expect(newTuit.tuit).toEqual(tuit5.tuit);
-      expect(newTuit.postedBy).toEqual(tuit5.postedBy);
-      expect(newTuit.postedOn).toEqual(tuit5.postedOn);
+      expect(newTuit.uid).toEqual(tuit5.uid);
 
       // update newTuit
       const updatedTuit = await updateTuit(newTuit.tid, "this is the updated tuit");
@@ -210,8 +201,7 @@ describe('findAllTuits', () => {
       // verify update matches target tuit
       expect(updatedTuit.tid).toEqual(target.tid);
       expect(updatedTuit.tuit).toEqual(target.tuit);
-      expect(updatedTuit.postedBy).toEqual(target.postedBy);
-      expect(updatedTuit.postedOn).toEqual(target.postedOn);
+      expect(updatedTuit.uid).toEqual(target.uid);
     });
   });
 });

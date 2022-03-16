@@ -31,7 +31,7 @@ test('user list renders async', async () => {
     <HashRouter>
       <UserList users={users}/>
     </HashRouter>);
-  const linkElement = screen.getByText(/NASA/i);
+  const linkElement = screen.getByText(/sarah_conor/i);
   expect(linkElement).toBeInTheDocument();
 
   users.mockRestore();

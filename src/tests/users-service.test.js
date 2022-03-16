@@ -117,7 +117,7 @@ describe('findAllUsers',  () => {
     // insert several known users
     usernames.map(username =>
       createUser({
-        username,
+        username: username,
         password: `${username}123`,
         email: `${username}@stooges.com`
       })

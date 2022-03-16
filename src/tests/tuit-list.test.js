@@ -1,5 +1,3 @@
-// noinspection SpellCheckingInspection
-
 import {Tuits} from "../components/tuits/index";
 import {screen, render} from "@testing-library/react";
 import {HashRouter} from "react-router-dom";
@@ -7,6 +5,8 @@ import {findAllTuits} from "../services/tuits-service";
 import axios from "axios";
 
 jest.mock('axios');
+
+//TODO: remove mocked_users, fix async render in both tuits and users
 
 const MOCKED_USERS = [
   {username: 'ellen_ripley', password: 'lv426', email: 'repley@weyland.com', _id: "123"},
@@ -33,9 +33,9 @@ test('tuit list renders async', async () => {
   const tuits = await findAllTuits();
   render(
     <HashRouter>
-      <TuitList tuits = {tuits}/>
+      <Tuits tuits = {tuits}/>
     </HashRouter>);
-  const linkElement = screen.getByText(/bob's tuit/i);
+  const linkElement = screen.getByText(/ellen's tuit/i);
   expect(linkElement).toBeInTheDocument();
 })
 
@@ -47,9 +47,9 @@ test('tuit list renders mocked', async () => {
 
   render(
     <HashRouter>
-      <TuitList tuits = {tuits}/>
+      <Tuits tuits = {tuits}/>
     </HashRouter>);
 
-  const tuit = screen.getByText(/alice's tuit/i);
+  const tuit = screen.getByText(/sarah's tuit/i);
   expect(tuit).toBeInTheDocument();
 });
