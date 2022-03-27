@@ -91,7 +91,7 @@ const Profile = () => {
             </li>
             <li className="nav-item">
               <Link to="/profile/MyDislikes"
-                    className ={`nav-link ${location.pathname.indexOf('dislikes') >= 0? 'active':''}`}>
+                    className ={`nav-link ${location.pathname.indexOf('dislikes') >= 0 ? 'active':''}`}>
                 Dislikes</Link>
             </li>
           </ul>
