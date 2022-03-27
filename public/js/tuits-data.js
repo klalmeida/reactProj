@@ -11,7 +11,8 @@ const data = [
     "stats": {
       "replies": 123,
       "retuits": 234,
-      "likes": 345
+      "likes": 345,
+      "dislikes": 34
     }
   },
   {
@@ -26,7 +27,8 @@ const data = [
     "stats": {
       "replies": 123,
       "retuits": 234,
-      "likes": 345
+      "likes": 345,
+      "dislikes": 2
     }
   },
   {
@@ -41,7 +43,8 @@ const data = [
     "stats": {
       "replies": 123,
       "retuits": 234,
-      "likes": 345
+      "likes": 345,
+      "dislikes": 34
     }
   },
 ];
