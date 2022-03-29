@@ -1,8 +1,17 @@
+/**
+ * @file dislikes-service.test uses various methods from our
+ * dislikes service that implement CRUD operations
+ */
+
 import {findAllTuitsDislikedByUser, findAllUsersThatDislikedTuit,
     userTogglesTuitDislikes} from "../services/dislikes-service";
 import {createTuit, deleteTuit} from "../services/tuits-service";
 import {createUser, deleteUsersByUsername} from "../services/users-service";
 
+/**
+ * @test createLike tests the service's ability to create a new
+ * dislike relationship between a tuit and a user
+ */
 describe('createDislike', () => {
     // sample tuit and user
     const user1 = {
@@ -42,7 +51,10 @@ describe('createDislike', () => {
         expect(findAllUsersThatDislikedTuit(newTuit.tid)).toEqual(newUser);
     });
 
-
+    /**
+     * @test removeExistingDislike tests the service's ability to delete an
+     * existing dislike from the dislikes collection
+     */
     describe('removeExistingDislike', () => {
         // sample tuit and user
         const user1 = {

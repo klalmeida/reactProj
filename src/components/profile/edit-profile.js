@@ -1,6 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 
+
 const EditProfile = () => {
     return(
       <div className="ttr-edit-profile">

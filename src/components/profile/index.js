@@ -7,6 +7,12 @@ import Media from "./media";
 import MyLikes from "./my-likes";
 import MyDislikes from "./my-dislikes"
 
+/**
+ * @constructor Profile uses the profile client service to adapt to the user interface
+ * based on login information.
+ * @returns {JSX.Element}
+ *
+ */
 const Profile = () => {
   const navigate = useNavigate();
   const location = useLocation();

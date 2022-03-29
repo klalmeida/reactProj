@@ -2,6 +2,12 @@ import {useState} from "react";
 import * as service from "../../services/security-service";
 import {useNavigate} from "react-router-dom";
 
+/**
+ * @constructor Signup uses the authentication service to interact with server
+ * middleware; invokes the 'service.signup' client that posts the new user to
+ * the signup middleware.
+ * @returns {JSX.Element}
+ */
 const Signup = () => {
     const [newUser, setNewUser] = useState({});
     const navigate = useNavigate();

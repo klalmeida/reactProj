@@ -1,8 +1,16 @@
+/**
+ * @file likes-service.test uses various methods from our likes
+ * service that implement CRUD operations
+ */
 import {findAllTuitsLikedByUser, findAllUsersThatLikedTuit,
     userTogglesTuitLikes} from "../services/likes-service";
 import {createTuit, deleteTuit} from "../services/tuits-service";
 import {createUser, deleteUsersByUsername} from "../services/users-service";
 
+/**
+ * @test createLike tests the service's ability to create a new like
+ * relationship between a tuit and a user
+ */
 describe('createLike', () => {
     // sample tuit and user
     const user1 = {
@@ -42,7 +50,10 @@ describe('createLike', () => {
         expect(findAllUsersThatLikedTuit(newTuit.tid)).toEqual(newUser);
     });
 
-
+    /**
+     * @test removeExistingLike tests the service's ability to delete an
+     * existing like from the likes collection
+     */
     describe('removeExistingLike', () => {
         // sample tuit and user
         const user1 = {

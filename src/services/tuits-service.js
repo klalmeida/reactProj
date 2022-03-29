@@ -1,8 +1,14 @@
 import axios from "axios";
+const BASE_URL = "https://cs5500-01-sp22.herokuapp.com";
+// KA heroku: // const BASE_URL = "https://kalmeida-cs5500.herokuapp.com/"
+// const BASE_URL = process.env.REACT_APP_BASE_URL;
 
-// const BASE_URL = "https://cs5500-01-sp22.herokuapp.com";
-const BASE_URL = process.env.REACT_APP_BASE_URL;
 
+/**
+ * Tuits service interacts with session API and accesses the tuits
+ * RESTful web API
+ * @property {axios}
+ */
 const TUITS_API = `${BASE_URL}/api/tuits`;
 const USERS_API = `${BASE_URL}/api/users`;
 

@@ -1,6 +1,12 @@
 import React from "react";
 import {Link} from "react-router-dom";
 
+
+/**
+ * @constructor UserList react component that uses the findAllUsers
+ * service to retrieve all the users in the database and render them
+ * @returns {JSX.Element}
+ */
 export const UserList = ({users, deleteUser}) => {
   return (
     <div className="list-group">

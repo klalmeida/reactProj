@@ -1,10 +1,17 @@
+/**
+ * @file tuits-service.test tests various methods from our
+ * tuits service that implement CRUD operations
+ *
+ */
 import {
     createTuit, deleteTuit, findTuitById,
     findAllTuits, updateTuit
 } from "../services/tuits-service";
 import {findAllTuitsLikedByUser, userTogglesTuitLikes} from "../services/likes-service";
 
-
+/**
+ * @test createTuit tests the service's ability to create a new tuit
+ */
 describe('createTuit', () => {
     // sample tuit to insert
     const tuit1 = {
@@ -36,8 +43,10 @@ describe('createTuit', () => {
     });
 });
 
-
-
+/**
+ * @test deleteTuit tests the service's ability to delete a tuit
+ * from the tuits collection
+ */
 describe('deleteTuit', () => {
 
     // sample tuit to delete
@@ -68,9 +77,10 @@ describe('deleteTuit', () => {
     });
 });
 
-
-
-
+/**
+ * @test findTuitById tests the service's ability to find a single
+ * tuit by their PK of tid
+ */
 describe('findTuitById', () => {
     // sample tuit to be retrieved
     const tuit3 = {
@@ -110,9 +120,10 @@ describe('findTuitById', () => {
     });
 });
 
-
-
-
+/**
+ * @test findAllTuits tests the service's ability to find all tuits
+ * in the tuits collection of a particular system
+ */
 describe('findAllTuits', () => {
 
     const tids = [
@@ -160,7 +171,10 @@ describe('findAllTuits', () => {
     });
 
 
-
+    /**
+     * @test updateTuit tests the service's ability to update and
+     * refresh new information in an existing tuit
+     */
     describe('updateTuit', () => {
         // original tuit and update target
         const tuit5 = {
@@ -207,7 +221,13 @@ describe('findAllTuits', () => {
     });
 
 
-    // NEW likes/dislikes service tests for A4
+    // >>>>NEW likes/dislikes service tests for A4<<<<
+    // >>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<
+
+    /**
+     * @test addLikes tests the service's ability to add a like
+     * to an existing tuit/user combo
+     */
     describe('addLikes', () => {
         // original tuit with zero likes
         const tuit6 = {
@@ -240,6 +260,11 @@ describe('findAllTuits', () => {
         });
     });
 
+
+    /**
+     * @test addDislikes tests the service's ability to add a
+     * dislike to an existing tuit/user combo
+     */
     describe('addDislikes', () => {
         // original tuit with zero likes
         const tuit7 = {

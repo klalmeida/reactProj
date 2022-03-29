@@ -2,6 +2,11 @@ import Tuits from "../tuits";
 import * as service from "../../services/likes-service";
 import {useEffect, useState} from "react";
 
+/**
+ * @constructor MyLikes react component that uses the findAllTuitsLikedByUser
+ * service to retrieve the liked tuits and render them
+ * @returns {JSX.Element}
+ */
 const MyLikes = () => {
     const [likedTuits, setLikedTuits] = useState([]);
     const findTuitsILike = () =>

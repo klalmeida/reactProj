@@ -1,9 +1,17 @@
+/**
+ * @file users-service.test tests various methods from our
+ * users service that implement CRUD operations
+ *
+ */
 import {
   createUser,
   deleteUsersByUsername, findAllUsers,
   findUserById
 } from "../services/users-service";
 
+/**
+ * @test createUser tests the service's ability to create a new user
+ */
 describe('createUser', () => {
   // sample user to insert
   const ripley = {
@@ -35,6 +43,10 @@ describe('createUser', () => {
   });
 });
 
+/**
+ * @test deleteUsersByUsername tests the service's ability to
+ * delete a user from the users collection given their username
+ */
 describe('deleteUsersByUsername', () => {
 
   // sample user to delete
@@ -65,6 +77,10 @@ describe('deleteUsersByUsername', () => {
   });
 });
 
+/**
+ * @test findUserById tests the service's ability to find a single
+ * user by their PK of uid
+ */
 describe('findUserById',  () => {
   // sample user we want to retrieve
   const adam = {
@@ -104,7 +120,10 @@ describe('findUserById',  () => {
   });
 });
 
-
+/**
+ * @test findAllUsers tests the service's ability to find all users
+ * in a particular system
+ */
 describe('findAllUsers',  () => {
 
   // sample users we'll insert to then retrieve

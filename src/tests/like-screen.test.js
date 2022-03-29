@@ -1,3 +1,8 @@
+/**
+ * @file like-screen.test uses jest mock framework to test our services
+ * using mocked data
+ */
+
 import {MyLikes} from "../components/profile/my-likes";
 import {screen, render} from "@testing-library/react";
 import {HashRouter} from "react-router-dom";
@@ -7,7 +12,7 @@ import {UserList} from "../components/profile/user-list";
 import axios from "axios";
 jest.mock('axios');
 
-
+//mocked data
 const MOCKED_USERS = [
     {username: 'ellen_ripley', password: 'lv426', email: 'repley@weyland.com', _id: "123"},
     {username: 'sarah_conor', password: 'illbeback', email: 'sarah@bigjeff.com', _id: "234"},
@@ -20,6 +25,10 @@ const MOCKED_LIKES = [
 ];
 
 
+/**
+ * @test tests the REACT component's ability to render a static
+ * array of likes
+ */
 test('likes screen renders static like array', () => {
     render(
         <HashRouter>
@@ -29,6 +38,11 @@ test('likes screen renders static like array', () => {
     expect(linkElement).toBeInTheDocument();
 });
 
+
+/**
+ * @test tests the REACT component's ability to render a list of
+ * likes asynchronously
+ */
 test('likes screen renders async', async () => {
     const likes = await findAllTuitsLikedByUser('234');
     render(
@@ -40,6 +54,11 @@ test('likes screen renders async', async () => {
     expect(linkElement).toBeInTheDocument();
     })
 
+
+/**
+ * @test tests the REACT component's ability to render a mocked
+ * list of likes
+ */
 test('like list renders mocked', async () => {
     axios.get.mockImplementation(() =>
         Promise.resolve({data: {likes: MOCKED_LIKES}}));

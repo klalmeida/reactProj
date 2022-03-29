@@ -3,6 +3,11 @@ import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import * as service from "../../services/security-service";
 
+/**
+ * @constructor Login uses the authentication service through login to
+ * interact with server middleware;hadles the login button's click events
+ * @returns {JSX.Element}
+ */
 export const Login = () => {
     const [loginUser, setLoginUser] = useState({});
     const navigate = useNavigate()
