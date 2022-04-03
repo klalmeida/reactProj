@@ -1,10 +1,10 @@
 import axios from "axios";
-const BASE_URL = process.env.REACT_APP_BASE_URL;
+
 /**
- * Authentication service allows the profile and logout middleware on
+ * @file Authentication service allows the profile and logout middleware on
  * the server to be accessed by a React client
- * @property {axios}
  */
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 const SECURITY_API = `${BASE_URL}/api/auth`;
 
 const api = axios.create({
